@@ -4,6 +4,8 @@
 
 Velin is designed to be simple, beautiful, and distraction-free. It provides a seamless writing experience with first-class support for Markdown and code blocks, wrapped in a modern interface.
 
+![Velin App Screenshot](public/darkss.png)
+
 ## ✨ Features
 
 - **Minimal & Sleek Design**: A clean, distraction-free interface that lets you focus on your content.
