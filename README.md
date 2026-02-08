@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Velin
 
-## Getting Started
+> A sleek, minimal note-taking application built for developers and writers.
 
-First, run the development server:
+Velin is designed to be simple, beautiful, and distraction-free. It provides a seamless writing experience with first-class support for Markdown and code blocks, wrapped in a modern interface.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Minimal & Sleek Design**: A clean, distraction-free interface that lets you focus on your content.
+- **Rich Text & Markdown**: Full support for Markdown syntax, including lists, headers, and formatting.
+- **Code Syntax Highlighting**: Built-in support for code blocks with syntax highlighting for various languages.
+- **Google Authentication**: Secure and fast sign-in using your Google account.
+- **Dark Mode Support**: Automatically adapts to your system theme for a comfortable reading experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Radix UI](https://www.radix-ui.com/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) (via [Neon](https://neon.tech/)) & [Prisma](https://www.prisma.io/)
+- **Authentication**: [Better Auth](https://better-auth.com/)
+- **Editor**: [Tiptap](https://tiptap.dev/)
 
-## Learn More
+## 🚀 Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+Follow these steps to set up the project locally.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [pnpm](https://pnpm.io/) (recommended) or npm/yarn
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   git clone https://github.com/pranavsurya77/Velin.git
+   cd velin
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
+
+3. **Set up environment variables:**
+
+   Create a `.env` file in the root directory and add the following variables:
+
+   ```env
+   DATABASE_URL="postgresql://user:password@host/dbname?sslmode=require"
+   
+   # Authentication
+   BETTER_AUTH_SECRET="your_generated_secret"
+   BETTER_AUTH_URL="http://localhost:3000"
+   NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+   
+   # Google OAuth
+   GOOGLE_CLIENT_ID="your_google_client_id"
+   GOOGLE_CLIENT_SECRET="your_google_client_secret"
+   
+   # Email Service (Optional if using Resend)
+   RESEND_API_KEY="your_resend_api_key"
+   ```
+
+4. **Initialize the database:**
+
+   Push the Prisma schema to your database:
+
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+5. **Run the development server:**
+
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.

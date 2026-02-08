@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 const formSchema = z.object({
-    name: z.string().min(3, "Name must be at least 3 characters.").max(20, "Name must be at most 20 characters."),
+    title: z.string(),
 })
 
 import {
@@ -19,15 +19,17 @@ import {
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
-import { createNotebook } from "@/server/notebooks";
+import { createNote } from "@/server/notes";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { title } from "process";
 import { Plus } from "lucide-react";
 
-export const CreateNotebook = () => {
+
+export const CreateNote = ({ notebookId }: { notebookId: string }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +37,7 @@ export const CreateNotebook = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
+            title: "",
         },
     })
 
@@ -46,9 +48,10 @@ export const CreateNotebook = () => {
             toast.error("User not found");
             return;
         }
-        const result = await createNotebook({
-            ...values,
-            userId
+        const result = await createNote({
+            title: values.title,
+            content: {},
+            notebookId
         });
 
         if (result.succes) {
@@ -67,27 +70,27 @@ export const CreateNotebook = () => {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button>
-                    Create Notebook
+                    Create Note
                     <Plus />
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Create Notebook</DialogTitle>
+                    <DialogTitle>Create a Note</DialogTitle>
                     <DialogDescription>
-                        Create a new notebook to store your notes.
+                        Create a new note in your Notebook.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
                             control={form.control}
-                            name="name"
+                            name="title"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Name</FormLabel>
+                                    <FormLabel>Title</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="My Notebook" {...field} />
+                                        <Input placeholder="My Note" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

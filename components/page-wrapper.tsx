@@ -17,6 +17,7 @@ import {
 import { SidebarTrigger } from "./ui/sidebar";
 import { Logout } from "@/components/logout";
 import { ModeToggle } from "./mode-toggle";
+import { Fragment } from "react/jsx-runtime";
 
 
 export function PageWrapper({ children, breadcrumps }: pageWrapperProps) {
@@ -29,9 +30,12 @@ export function PageWrapper({ children, breadcrumps }: pageWrapperProps) {
                         <Breadcrumb>
                             <BreadcrumbList>
                                 {breadcrumps.map((breadcramp, index) => (
-                                    <BreadcrumbItem key={index}>
-                                        <BreadcrumbLink href={breadcramp.href}>{breadcramp.label}</BreadcrumbLink>
-                                    </BreadcrumbItem>
+                                    <Fragment key={breadcramp.label}>
+                                        <BreadcrumbItem>
+                                            <BreadcrumbLink href={breadcramp.href}>{breadcramp.label}</BreadcrumbLink>
+                                        </BreadcrumbItem>
+                                        {index < breadcrumps.length - 1 && <BreadcrumbSeparator />}
+                                    </Fragment>
                                 ))}
                             </BreadcrumbList>
                         </Breadcrumb >

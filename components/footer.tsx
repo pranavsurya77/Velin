@@ -1,31 +1,32 @@
 import { Logo } from '@/components/logo'
 import Link from 'next/link'
+import Image from 'next/image'
 
-const links = [
-    {
-        title: 'Features',
-        href: '#',
-    },
-    {
-        title: 'Solution',
-        href: '#',
-    },
-    {
-        title: 'Customers',
-        href: '#',
-    },
-    {
-        title: 'Pricing',
-        href: '#',
-    },
-    {
-        title: 'Help',
-        href: '#',
-    },
-    {
-        title: 'About',
-        href: '#',
-    },
+const links: any[] = [
+    // {
+    //     title: 'Features',
+    //     href: '#',
+    // },
+    // {
+    //     title: 'Solution',
+    //     href: '#',
+    // },
+    // {
+    //     title: 'Customers',
+    //     href: '#',
+    // },
+    // {
+    //     title: 'Pricing',
+    //     href: '#',
+    // },
+    // {
+    //     title: 'Help',
+    //     href: '#',
+    // },
+    // {
+    //     title: 'About',
+    //     href: '#',
+    // },
 ]
 
 export default function Footer() {
@@ -36,7 +37,24 @@ export default function Footer() {
                     href="/"
                     aria-label="go home"
                     className="mx-auto block size-fit">
-                    <Logo />
+                    <div className='flex items-center'>
+                        <Image
+                            src="/logo.png"
+                            alt="Velin Logo"
+                            width={60}
+                            height={60}
+                            className="dark:hidden -mr-3 mt-1"
+                        />
+                        <Image
+                            src="/logo-white.png"
+                            alt="Velin Logo"
+                            width={60}
+                            height={60}
+                            className="hidden dark:block -mr-3 mt-1"
+                        />
+                        <span className="text-xl font-bold">Velin</span>
+
+                    </div>
                 </Link>
 
                 <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
@@ -158,7 +176,7 @@ export default function Footer() {
                         </svg>
                     </Link>
                 </div>
-                <span className="text-muted-foreground block text-center text-sm"> © {new Date().getFullYear()} Tailark, All rights reserved</span>
+                <span className="text-muted-foreground block text-center text-sm"> © {new Date().getFullYear()} Velin, All rights reserved</span>
             </div>
         </footer>
     )

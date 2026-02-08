@@ -7,24 +7,28 @@ import type { Notebooks, Notes } from "@/lib/prisma";
 import { headers } from "next/headers";
 
 
-export const createNotebook = async (values: Pick<Notebooks, "name" | "userId">) => {
+export const createNote = async (values: Pick<Notes, "title" | "content" | "notebookId">) => {
     try {
-        await prisma.notebooks.create({
-            data: values
+        await prisma.notes.create({
+            data: {
+                title: values.title,
+                content: values.content as any,
+                notebookId: values.notebookId
+            }
         })
         return {
             succes: true,
-            message: "Notebook created successfully"
+            message: "Note created successfully"
         }
     } catch (error) {
         return {
             succes: false,
-            message: "Failed to create notebook"
+            message: "Failed to create note"
         }
     }
 }
 
-export const getNotebooks = async () => {
+export const getNotes = async () => {
     try {
         const session = await auth.api.getSession({
             headers: await headers()
@@ -38,84 +42,86 @@ export const getNotebooks = async () => {
                 message: "User not found"
             }
         }
-        const notebooks = await prisma.notebooks.findMany({
+        const notes = await prisma.notes.findMany({
             where: {
-                userId: userId
-            },
-            include: {
-                notes: true
+                notebook: {
+                    userId: userId
+                }
             }
         })
-
         return {
             succes: true,
-            notebooks
+            notes
         }
     } catch (error) {
         return {
             succes: false,
-            message: "Failed to get notebooks"
+            message: "Failed to get notes"
         }
     }
 }
 
-export const getNotebookById = async (id: string) => {
+export const getNoteById = async (id: string) => {
     try {
-        const notebook = await prisma.notebooks.findUnique({
+        const note = await prisma.notes.findUnique({
             where: {
                 id: id
             },
             include: {
-                notes: true
+                notebook: true
             }
         })
         return {
             succes: true,
-            notebook
+            note
         }
     } catch (error) {
         return {
             succes: false,
-            message: "Failed to get notebook"
+            message: "Failed to get note"
         }
     }
 }
 
-export const updateNotebook = async (id: string, values: Notebooks) => {
+export const updateNote = async (id: string, values: Partial<Notes>) => {
     try {
-        await prisma.notebooks.update({
+        await prisma.notes.update({
             where: {
                 id: id
             },
-            data: values
+            data: {
+                ...(values.title && { title: values.title }),
+                ...(values.content !== undefined && { content: values.content as any }),
+                ...(values.notebookId && { notebookId: values.notebookId })
+            }
         })
         return {
             succes: true,
-            message: "Notebook updated successfully"
+            message: "Note updated successfully"
         }
     } catch (error) {
         return {
             succes: false,
-            message: "Failed to update notebook"
+            message: "Failed to update note"
         }
     }
 }
 
-export const deleteNoteboook = async (id: string) => {
+export const deleteNote = async (id: string) => {
     try {
-        await prisma.notebooks.delete({
+        await prisma.notes.delete({
             where: {
                 id: id
             }
         })
         return {
             succes: true,
-            message: "Notebook deleted successfully"
+            message: "Note deleted successfully"
         }
     } catch (error) {
         return {
             succes: false,
-            message: "Failed to delete notebook"
+            message: "Failed to delete note"
         }
     }
 }

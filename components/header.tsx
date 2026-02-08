@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { Logo } from '@/components/logo'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
@@ -8,12 +8,7 @@ import { cn } from '@/lib/utils'
 import { useScroll } from 'motion/react'
 import { ModeToggle } from './mode-toggle'
 
-const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
-]
+const menuItems: any[] = []
 
 export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
@@ -39,8 +34,22 @@ export const HeroHeader = () => {
                             <Link
                                 href="/"
                                 aria-label="home"
-                                className="flex items-center space-x-2">
-                                <Logo />
+                                className="flex items-center">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Velin Logo"
+                                    width={60}
+                                    height={60}
+                                    className="dark:hidden -mr-3 mt-1"
+                                />
+                                <Image
+                                    src="/logo-white.png"
+                                    alt="Velin Logo"
+                                    width={60}
+                                    height={60}
+                                    className="hidden dark:block -mr-3 mt-1"
+                                />
+                                <span className="text-xl font-bold">Velin</span>
                             </Link>
 
                             <button
@@ -80,8 +89,8 @@ export const HeroHeader = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <ModeToggle />
+                            <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                <ModeToggle size="icon-sm" />
                                 <Button
                                     asChild
                                     variant="outline"

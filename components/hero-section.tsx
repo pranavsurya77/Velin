@@ -18,11 +18,11 @@ const transitionVariants = {
             opacity: 1,
             filter: 'blur(0px)',
             y: 0,
-            transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
-            },
+            // transition: {
+            //     type: 'spring',
+            //     bounce: 0.3,
+            //     duration: 1.5,
+            // },
         },
     },
 }
@@ -49,7 +49,7 @@ export default function HeroSection() {
                                     speedSegment={0.3}
                                     as="h1"
                                     className="mt-8 max-w-2xl text-balance text-5xl font-semibold md:text-6xl lg:mt-16">
-                                    ⌘Notes for the way you   code.
+                                    ⌘Notes for the way you code.
                                 </TextEffect>
                                 <TextEffect
                                     per="line"
@@ -82,7 +82,7 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#link">
+                                            <Link href="/dashboard">
                                                 <span className="text-nowrap">Start Crafting</span>
                                             </Link>
                                         </Button>
@@ -115,15 +115,15 @@ export default function HeroSection() {
                             <div className="mask-b-from-55% relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                                     <Image
-                                        className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                                        src="/mail2.png"
+                                        className="bg-background relative hidden h-auto w-full rounded-2xl dark:block"
+                                        src="/darkss.png"
                                         alt="app screen"
                                         width="2700"
                                         height="1440"
                                     />
                                     <Image
-                                        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                                        src="/mail2-light.png"
+                                        className="z-2 border-border/25 relative h-auto w-full rounded-2xl border dark:hidden"
+                                        src="/lightss.png"
                                         alt="app screen"
                                         width="2700"
                                         height="1440"
